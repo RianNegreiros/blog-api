@@ -2,6 +2,7 @@ package com.github.riannegreiros.blogapi.service.impl;
 
 import com.github.riannegreiros.blogapi.dto.PostDTO;
 import com.github.riannegreiros.blogapi.entity.Post;
+import com.github.riannegreiros.blogapi.exception.ResourceNotFoundException;
 import com.github.riannegreiros.blogapi.repository.PostRepository;
 import com.github.riannegreiros.blogapi.service.PostService;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class PostServiceImpl implements PostService {
     public List<PostDTO> getAllPosts() {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public PostDTO getPostById(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", "id"));
+        return mapToDTO(post);
     }
 
     private PostDTO mapToDTO(Post post) {
