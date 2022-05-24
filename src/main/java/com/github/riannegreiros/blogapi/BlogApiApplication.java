@@ -1,4 +1,4 @@
-package com.github.RianNegreiros.blogapi;
+package com.github.riannegreiros.blogapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

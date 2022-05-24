@@ -1,4 +1,4 @@
-package com.github.RianNegreiros.blogapi;
+package com.github.riannegreiros.blogapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
