@@ -1,28 +1,16 @@
-package com.github.riannegreiros.blogapi.entity;
+package com.github.riannegreiros.blogapi.dto;
 
-import javax.persistence.*;
+public class PostDTO {
 
-@Entity
-@Table(name = "posts")
-public class Post {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
     private String description;
-
-    @Column(nullable = false)
     private String content;
 
-    public Post() {
+    public PostDTO() {
     }
 
-    public Post(Long id, String title, String description, String content) {
+    public PostDTO(Long id, String title, String description, String content) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,6 +19,10 @@ public class Post {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
