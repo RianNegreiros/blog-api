@@ -3,10 +3,12 @@ package com.github.riannegreiros.blogapi.service.impl;
 import com.github.riannegreiros.blogapi.dto.CommentDTO;
 import com.github.riannegreiros.blogapi.entity.Comment;
 import com.github.riannegreiros.blogapi.entity.Post;
+import com.github.riannegreiros.blogapi.exception.BlogAPIException;
 import com.github.riannegreiros.blogapi.exception.ResourceNotFoundException;
 import com.github.riannegreiros.blogapi.repository.CommentRepository;
 import com.github.riannegreiros.blogapi.repository.PostRepository;
 import com.github.riannegreiros.blogapi.service.CommentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +43,21 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentRepository.findByPostId(postId);
 
         return comments.stream().map(comment -> mapToDTO(comment)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CommentDTO getCommentById(Long postId, Long commentId) {
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new ResourceNotFoundException("Post", "id", String.valueOf(postId))
+        );
+
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new ResourceNotFoundException("Comment", "id", String.valueOf(commentId))
+        );
+
+        if(!comment.getPost().getId().equals(post.getId())) throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Comment does not belong to post");
+
+        return mapToDTO(comment);
     }
 
     private CommentDTO mapToDTO(Comment comment) {
