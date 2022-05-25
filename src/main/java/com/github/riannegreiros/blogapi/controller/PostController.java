@@ -1,12 +1,12 @@
 package com.github.riannegreiros.blogapi.controller;
 
 import com.github.riannegreiros.blogapi.dto.PostDTO;
+import com.github.riannegreiros.blogapi.helpers.AppConstants;
+import com.github.riannegreiros.blogapi.helpers.PostResponse;
 import com.github.riannegreiros.blogapi.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -19,8 +19,13 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDTO> getAllPosts() {
-        return postService.getAllPosts();
+    public PostResponse getAllPosts(
+            @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer page,
+            @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer size,
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
+    ) {
+        return postService.getAllPosts(page, size, sortBy, sortDir);
     }
 
     @GetMapping("/{id}")

@@ -1,13 +1,14 @@
 package com.github.riannegreiros.blogapi.service;
 
 import com.github.riannegreiros.blogapi.dto.PostDTO;
+import com.github.riannegreiros.blogapi.helpers.PostResponse;
 
 import java.util.List;
 
 public interface PostService {
     PostDTO createPost(PostDTO postDTO);
 
-    List<PostDTO> getAllPosts();
+    PostResponse getAllPosts(Integer page, Integer size, String sortBy, String sortDir);
 
     PostDTO getPostById(Long id);
 
