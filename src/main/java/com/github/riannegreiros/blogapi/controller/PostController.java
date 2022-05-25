@@ -1,6 +1,7 @@
 package com.github.riannegreiros.blogapi.controller;
 
 import com.github.riannegreiros.blogapi.dto.PostDTO;
+import com.github.riannegreiros.blogapi.helpers.AppConstants;
 import com.github.riannegreiros.blogapi.helpers.PostResponse;
 import com.github.riannegreiros.blogapi.service.PostService;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,10 @@ public class PostController {
 
     @GetMapping
     public PostResponse getAllPosts(
-            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(value = "size", defaultValue = "10", required = false) int size,
-            @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
-            @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir
+            @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int page,
+            @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int size,
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
     ) {
         return postService.getAllPosts(page, size, sortBy, sortDir);
     }
