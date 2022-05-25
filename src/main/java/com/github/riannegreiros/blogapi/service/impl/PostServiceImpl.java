@@ -32,7 +32,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponse getAllPosts(int page, int size, String sortBy, String sortDir) {
+    public PostResponse getAllPosts(Integer page, Integer size, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortDir).ascending()
                 : Sort.by(sortDir).descending();
         Pageable pageable = PageRequest.of(page, size, sort);

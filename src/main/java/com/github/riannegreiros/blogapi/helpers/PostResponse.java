@@ -6,16 +6,16 @@ import java.util.List;
 
 public class PostResponse {
     private List<PostDTO> content;
-    private int page;
-    private int size;
+    private Integer page;
+    private Integer size;
     private Long totalElements;
-    private int totalPages;
+    private Integer totalPages;
     private Boolean last;
 
     public PostResponse() {
     }
 
-    public PostResponse(List<PostDTO> content, int page, int size, Long totalElements, int totalPages, Boolean last) {
+    public PostResponse(List<PostDTO> content, Integer page, Integer size, Long totalElements, Integer totalPages, Boolean last) {
         this.content = content;
         this.page = page;
         this.size = size;
@@ -32,19 +32,19 @@ public class PostResponse {
         this.content = content;
     }
 
-    public int getPage() {
+    public Integer getPage() {
         return page;
     }
 
-    public void setPage(int page) {
+    public void setPage(Integer page) {
         this.page = page;
     }
 
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(Integer size) {
         this.size = size;
     }
 
@@ -56,11 +56,11 @@ public class PostResponse {
         this.totalElements = totalElements;
     }
 
-    public int getTotalPages() {
+    public Integer getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(int totalPages) {
+    public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
     }
 
