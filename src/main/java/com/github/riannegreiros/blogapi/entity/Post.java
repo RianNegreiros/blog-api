@@ -1,6 +1,8 @@
 package com.github.riannegreiros.blogapi.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -19,14 +21,18 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
+
     public Post() {
     }
 
-    public Post(Long id, String title, String description, String content) {
+    public Post(Long id, String title, String description, String content, Set<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.content = content;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -55,5 +61,13 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
