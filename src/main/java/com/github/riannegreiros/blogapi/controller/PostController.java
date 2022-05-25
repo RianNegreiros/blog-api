@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
@@ -22,9 +20,10 @@ public class PostController {
     @GetMapping
     public PostResponse getAllPosts(
             @RequestParam(value = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(value = "size", defaultValue = "10", required = false) int size
+            @RequestParam(value = "size", defaultValue = "10", required = false) int size,
+            @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy
     ) {
-        return postService.getAllPosts(page, size);
+        return postService.getAllPosts(page, size, sortBy);
     }
 
     @GetMapping("/{id}")
