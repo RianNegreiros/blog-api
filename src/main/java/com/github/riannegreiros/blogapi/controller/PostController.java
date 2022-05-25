@@ -1,6 +1,7 @@
 package com.github.riannegreiros.blogapi.controller;
 
 import com.github.riannegreiros.blogapi.dto.PostDTO;
+import com.github.riannegreiros.blogapi.helpers.PostResponse;
 import com.github.riannegreiros.blogapi.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDTO> getAllPosts(
+    public PostResponse getAllPosts(
             @RequestParam(value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "size", defaultValue = "10", required = false) int size
     ) {

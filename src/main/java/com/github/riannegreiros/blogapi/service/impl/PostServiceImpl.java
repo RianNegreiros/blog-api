@@ -3,6 +3,7 @@ package com.github.riannegreiros.blogapi.service.impl;
 import com.github.riannegreiros.blogapi.dto.PostDTO;
 import com.github.riannegreiros.blogapi.entity.Post;
 import com.github.riannegreiros.blogapi.exception.ResourceNotFoundException;
+import com.github.riannegreiros.blogapi.helpers.PostResponse;
 import com.github.riannegreiros.blogapi.repository.PostRepository;
 import com.github.riannegreiros.blogapi.service.PostService;
 import org.springframework.data.domain.Page;
@@ -30,11 +31,21 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPosts(int page, int size) {
+    public PostResponse getAllPosts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts = postRepository.findAll(pageable);
         List<Post> postList = posts.getContent();
-        return postList.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+        List<PostDTO> content = postList.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(content);
+        postResponse.setPage(posts.getNumber());
+        postResponse.setSize(posts.getSize());
+        postResponse.setTotalElements(postResponse.getTotalElements());
+        postResponse.setTotalPages(posts.getTotalPages());
+        postResponse.setLast(posts.isLast());
+
+        return postResponse;
     }
 
     @Override
