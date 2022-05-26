@@ -2,12 +2,24 @@ package com.github.riannegreiros.blogapi.dto;
 
 import com.github.riannegreiros.blogapi.entity.Post;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class CommentDTO {
 
     private Long id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
+    @Email
     private String email;
+
+    @NotBlank
     private String body;
+
+    @NotBlank
     private Post post;
 
     public CommentDTO() {
