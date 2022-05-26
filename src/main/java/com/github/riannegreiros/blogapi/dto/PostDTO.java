@@ -1,14 +1,19 @@
 package com.github.riannegreiros.blogapi.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class PostDTO {
 
     private Long id;
+    @NotBlank
+    @Size(min = 2, message = "Post title should have at least 2 characters")
     private String title;
+    @NotBlank
     private String description;
+    @NotBlank
     private String content;
-
     private Set<CommentDTO> commentDTOSet;
 
     public PostDTO() {
