@@ -1,15 +1,15 @@
-package com.github.riannegreiros.blogapi.config;
+package com.github.riannegreiros.blogapi.security;
 
 import com.github.riannegreiros.blogapi.entity.User;
 import com.github.riannegreiros.blogapi.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 
-@Component
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found username or email:" + username));
+                        new UsernameNotFoundException("User not found by username:" + username));
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(), new HashSet<>());

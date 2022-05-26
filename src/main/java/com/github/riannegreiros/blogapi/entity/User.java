@@ -3,6 +3,7 @@ package com.github.riannegreiros.blogapi.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -28,15 +29,19 @@ public class User {
     @NotBlank
     private String password;
 
+    @ManyToMany
+    private List<Role> roles;
+
     public User() {
     }
 
-    public User(Long id, String name, String username, String email, String password) {
+    public User(Long id, String name, String username, String email, String password, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -73,5 +78,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
