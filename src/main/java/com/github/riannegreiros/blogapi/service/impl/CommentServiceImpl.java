@@ -8,6 +8,7 @@ import com.github.riannegreiros.blogapi.exception.ResourceNotFoundException;
 import com.github.riannegreiros.blogapi.repository.CommentRepository;
 import com.github.riannegreiros.blogapi.repository.PostRepository;
 import com.github.riannegreiros.blogapi.service.CommentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,12 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private PostRepository postRepository;
 
-    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository) {
+    private ModelMapper modelMapper;
+
+    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -72,20 +76,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private CommentDTO mapToDTO(Comment comment) {
-        CommentDTO commentDTO = new CommentDTO();
-        commentDTO.setId(comment.getId());
-        commentDTO.setName(comment.getName());
-        commentDTO.setEmail(comment.getEmail());
-        commentDTO.setBody(comment.getBody());
-        return commentDTO;
+        return modelMapper.map(comment, CommentDTO.class);
     }
 
     private Comment mapToEntity(CommentDTO commentDTO) {
-        Comment comment = new Comment();
-        comment.setName(commentDTO.getName());
-        comment.setEmail(commentDTO.getEmail());
-        comment.setBody(commentDTO.getBody());
-        return comment;
+        return modelMapper.map(commentDTO, Comment.class);
     }
 
     private Comment checkCommentExist(Long postId, Long commentId) {

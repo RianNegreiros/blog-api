@@ -1,5 +1,7 @@
 package com.github.riannegreiros.blogapi.dto;
 
+import java.util.Set;
+
 public class PostDTO {
 
     private Long id;
@@ -7,14 +9,17 @@ public class PostDTO {
     private String description;
     private String content;
 
+    private Set<CommentDTO> commentDTOSet;
+
     public PostDTO() {
     }
 
-    public PostDTO(Long id, String title, String description, String content) {
+    public PostDTO(Long id, String title, String description, String content, Set<CommentDTO> commentDTOSet) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.content = content;
+        this.commentDTOSet = commentDTOSet;
     }
 
     public Long getId() {
@@ -47,5 +52,13 @@ public class PostDTO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Set<CommentDTO> getCommentDTOSet() {
+        return commentDTOSet;
+    }
+
+    public void setCommentDTOSet(Set<CommentDTO> commentDTOSet) {
+        this.commentDTOSet = commentDTOSet;
     }
 }
