@@ -1,28 +1,29 @@
 package com.github.riannegreiros.blogapi.entity;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "roles")
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
     private String name;
 
     public Role() {
     }
 
-    public Role(Long id) {
+    public Role(UUID id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

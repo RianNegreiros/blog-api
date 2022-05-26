@@ -1,25 +1,26 @@
 package com.github.riannegreiros.blogapi.dto;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CreateUserRoleDTO {
 
-    private Long idUser;
-    private List<Long> idsRoles;
+    private UUID idUser;
+    private List<UUID> idsRoles;
 
-    public Long getIdUser() {
+    public UUID getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(UUID idUser) {
         this.idUser = idUser;
     }
 
-    public List<Long> getIdsRoles() {
+    public List<UUID> getIdsRoles() {
         return idsRoles;
     }
 
-    public void setIdsRoles(List<Long> idsRoles) {
+    public void setIdsRoles(List<UUID> idsRoles) {
         this.idsRoles = idsRoles;
     }
 }

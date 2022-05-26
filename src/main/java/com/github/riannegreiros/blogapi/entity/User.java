@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -13,8 +14,8 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @NotBlank
     private String name;
@@ -35,7 +36,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String username, String email, String password, List<Role> roles) {
+    public User(UUID id, String name, String username, String email, String password, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -44,7 +45,7 @@ public class User {
         this.roles = roles;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
