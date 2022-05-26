@@ -7,8 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -24,8 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found by username:" + username));
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                user.getPassword(), new HashSet<>());
+        return UserPrincipal.create(user);
 
     }
 }
