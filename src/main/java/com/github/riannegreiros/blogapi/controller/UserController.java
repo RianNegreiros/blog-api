@@ -11,7 +11,9 @@ import com.github.riannegreiros.blogapi.entity.Role;
 import com.github.riannegreiros.blogapi.entity.User;
 import com.github.riannegreiros.blogapi.exception.BlogAPIException;
 import com.github.riannegreiros.blogapi.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,16 +38,19 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ApiOperation(value = "Sign Up or Register user to Blog application")
     @PostMapping
     public User createUser(@RequestBody SignUpDTO signUpDTO) {
         return userService.createUser(signUpDTO);
     }
 
+    @ApiOperation(value = "Add a role to user")
     @PostMapping("/role")
     public User createUserRole(@RequestBody CreateUserRoleDTO createUserRoleDTO) {
         return userService.createUserRole(createUserRoleDTO);
     }
 
+    @ApiOperation(value = "Refresh user token")
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
             String authorizationHeader = request.getHeader(AUTHORIZATION);
