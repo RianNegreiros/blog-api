@@ -42,7 +42,7 @@ public class PostServiceImpl implements PostService {
         Pageable pageable = PageRequest.of(page, size, sort);
         Page<Post> posts = postRepository.findAll(pageable);
         List<Post> postList = posts.getContent();
-        List<PostDTO> content = postList.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+        List<PostDTO> content = postList.stream().map(this::mapToDTO).collect(Collectors.toList());
 
         PostResponse postResponse = new PostResponse();
         postResponse.setContent(content);
@@ -57,13 +57,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO getPostById(Long id) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", "id"));
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
         return mapToDTO(post);
     }
 
     @Override
     public PostDTO updatePost(PostDTO postDTO, Long id) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", "id"));
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
 
         post.setTitle(postDTO.getTitle());
         post.setDescription(postDTO.getDescription());
@@ -75,7 +75,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostById(Long id) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", "id"));
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
         postRepository.delete(post);
     }
 
