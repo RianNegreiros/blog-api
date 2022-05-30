@@ -22,7 +22,7 @@ public class UserPrincipal implements UserDetails {
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE".concat(role.getName()))).collect(Collectors.toList());
+        authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_".concat(role.getName()))).collect(Collectors.toList());
 
         this.authorities = authorities;
     }
