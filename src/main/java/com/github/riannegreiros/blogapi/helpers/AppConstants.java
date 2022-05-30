@@ -9,4 +9,11 @@ public class AppConstants {
     public static final String AUTH_TOKEN_TYPE = "Bearer ";
     public static final Integer TOKEN_EXPIRATION = 600_000;
     public static final Integer REFRESH_TOKEN_EXPIRATION = 86_400_000;
+    public static final String[] AUTH_WHITELIST = {
+            "/authenticate",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/v3/api-docs",
+            "/webjars/**"
+    };
 }
